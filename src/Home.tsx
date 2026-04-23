@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import type { ReactNode, ButtonHTMLAttributes } from "react";
 import { useNavigate } from "react-router-dom";
 
 import img1 from "/images/helvra1.png";
@@ -8,17 +9,34 @@ import { websites } from "./websites";
 
 // ---------- BASE COMPONENTS ----------
 
-const Container = ({ children }) => (
+const Container = ({ children }: { children: ReactNode }) => (
   <div className="max-w-6xl mx-auto px-6">{children}</div>
 );
 
-const Section = ({ children, className = "", ...props }) => (
+import type { HTMLAttributes } from "react";
+
+const Section = ({
+  children,
+  className = "",
+  ...props
+}: {
+  children: ReactNode;
+  className?: string;
+} & HTMLAttributes<HTMLElement>) => (
   <section className={`py-28 ${className}`} {...props}>
     {children}
   </section>
 );
 
-const ProjectCard = ({ id, title, desc, tags, images }) => {
+type ProjectCardProps = {
+  id: string;
+  title: string;
+  desc: string;
+  tags: string[];
+  images: string[];
+};
+
+const ProjectCard = ({ id, title, desc, tags, images }: ProjectCardProps) => {
   const navigate = useNavigate();
 
   return (
@@ -35,7 +53,7 @@ const ProjectCard = ({ id, title, desc, tags, images }) => {
         <p className="text-sm text-gray-600">{desc}</p>
 
         <div className="flex gap-2 mt-3 flex-wrap">
-          {tags.map((t, i) => (
+          {tags.map((t: string, i: number) => (
             <span key={i} className="text-xs bg-gray-100 px-2 py-1 rounded">
               {t}
             </span>
@@ -46,7 +64,14 @@ const ProjectCard = ({ id, title, desc, tags, images }) => {
   );
 };
 
-const PrimaryButton = ({ children, className = "", ...props }) => (
+
+const PrimaryButton = ({
+  children,
+  className = "",
+  ...props
+}: {
+  children: ReactNode;
+} & ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
     className={`px-6 py-3 rounded-xl bg-black text-white hover:bg-gray-800 transition-all duration-300 shadow-sm ${className}`}
     {...props}
@@ -55,7 +80,13 @@ const PrimaryButton = ({ children, className = "", ...props }) => (
   </button>
 );
 
-const SecondaryButton = ({ children, className = "", ...props }) => (
+const SecondaryButton = ({
+  children,
+  className = "",
+  ...props
+}: {
+  children: ReactNode;
+} & ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
     className={`px-6 py-3 rounded-xl border border-gray-300 text-black hover:bg-gray-100 transition-all duration-300 ${className}`}
     {...props}
@@ -64,26 +95,29 @@ const SecondaryButton = ({ children, className = "", ...props }) => (
   </button>
 );
 
-const Tag = ({ children }) => (
+const Tag = ({ children }: { children: ReactNode }) => (
   <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-md">
     {children}
   </span>
 );
 
 // ---------- CAROUSEL ----------
-const Carousel = ({ images }) => {
-  const [index, setIndex] = useState(0);
+const Carousel = ({ images }: { images: string[] }) => {
+  const [index, setIndex] = useState<number>(0);
 
   useEffect(() => {
+    if (!images.length) return;
+
     const i = setInterval(() => {
-      setIndex((prev) => (prev + 1) % images.length);
+      setIndex((prev: number) => (prev + 1) % images.length);
     }, 3500);
+
     return () => clearInterval(i);
   }, [images.length]);
 
   return (
     <div className="relative h-80 overflow-hidden rounded-2xl shadow-md">
-      {images.map((img, i) => (
+      {images.map((img: string, i: number) => (
         <img
           key={i}
           src={img}
@@ -95,8 +129,6 @@ const Carousel = ({ images }) => {
     </div>
   );
 };
-
-
 
 // ---------- SCROLL REVEAL ----------
 const useReveal = () => {
@@ -114,6 +146,8 @@ const useReveal = () => {
     elements.forEach((el) => observer.observe(el));
   }, []);
 };
+
+
 
 export default function Home() {
   const navigate = useNavigate();

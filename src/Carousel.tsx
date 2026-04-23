@@ -1,14 +1,18 @@
 import { useState } from "react";
 
-export default function Carousel({ images = [] }) {
-  const [index, setIndex] = useState(0);
+type Props = {
+  images?: string[]; // optional, since you default it
+};
+
+export default function Carousel({ images = [] }: Props) {
+  const [index, setIndex] = useState<number>(0);
 
   const prev = () => {
-    setIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+    setIndex((i: number) => (i === 0 ? images.length - 1 : i - 1));
   };
 
   const next = () => {
-    setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+    setIndex((i: number) => (i === images.length - 1 ? 0 : i + 1));
   };
 
   return (
@@ -22,12 +26,12 @@ export default function Carousel({ images = [] }) {
             transform: `translateX(-${index * 100}%)`
           }}
         >
-          {images.map((img, i) => (
+          {images.map((img: string, i: number) => (
             <div key={i} className="min-w-full">
-             <img
-  src={img}
-  className="w-full h-[420px] object-contain bg-gray-50 rounded-xl"
-/>
+              <img
+                src={img}
+                className="w-full h-[420px] object-contain bg-gray-50 rounded-xl"
+              />
             </div>
           ))}
         </div>
@@ -51,7 +55,7 @@ export default function Carousel({ images = [] }) {
 
       {/* DOTS */}
       <div className="flex justify-center gap-2 mt-4">
-        {images.map((_, i) => (
+        {images.map((_: string, i: number) => (
           <div
             key={i}
             onClick={() => setIndex(i)}
