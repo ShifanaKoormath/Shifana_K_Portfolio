@@ -314,13 +314,6 @@ export default function Home() {
 ]}
             />
 
-            <ProjectCard
-              id="voice"
-              title="Secure Voice System"
-              desc="Encrypted AI voice pipeline."
-              tags={["Security", "AI"]}
-              images={["/images/voice1.png"]}
-            />
 
           </div>
         </Container>

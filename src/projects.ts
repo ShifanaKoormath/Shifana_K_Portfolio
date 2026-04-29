@@ -109,46 +109,5 @@ helvra: {
     github: "https://github.com/ShifanaKoormath/Academic-Companion-Platform"
   },
 
-  voice: {
-    title: "Secure Voice System",
-
-    description:
-      "An encrypted voice processing pipeline integrating AI-based classification with secure handling.",
-
-    tags: ["Security", "AI", "Signal Processing"],
-
-    images: [
-      "/images/voice1.png",
-      "/images/voice2.png",
-      "/images/voice3.png",
-      "/images/voice4.png",
-      "/images/voice5.png",
-      "/images/voice6.png",
-      "/images/voice7.png",
-    ],
-
-    problem:
-      "Voice systems often lack secure processing, making them vulnerable to misuse.",
-
-    solution:
-      "Designed a pipeline that encrypts voice input before processing.",
-
-    logic:
-      "Voice → Encrypt → Process → Classify pipeline ensuring security and intelligence.",
-
-    architecture:
-      "Integrated encryption with AI processing layers for secure system design.",
-
-    impact:
-      "Demonstrates how intelligent systems can be built without compromising security.",
-
-    highlights: [
-      "Encrypted pipeline",
-      "AI classification",
-      "Secure architecture"
-    ],
-
-    live: "",
-    github: "https://github.com/ShifanaKoormath/Secure_voice_communication.git"
-  }
+ 
 };
